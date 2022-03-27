@@ -1,0 +1,101 @@
+body {
+  box-sizing: border-box;
+}
+table {
+  border-collapse: collapse;
+}
+
+.ly_header {
+}
+.ly_container {
+  width: 90%;
+  max-width: 600px;
+  margin: auto;
+}
+
+.bl_nicoCale {
+}
+
+.bl_nicoCale_header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+.bl_nicoCale_targetMonth {
+  font-size: 1.2em;
+}
+
+.bl_nicoCale table {
+  width: 100%;
+}
+
+.bl_nicoCale th,
+.bl_nicoCale td {
+  /* padding: 10px; */
+  min-width: 80px;
+  height: 80px;
+  border: 1px solid black;
+  text-align: center;
+}
+
+.bl_nicoCale th {
+  background-color: beige;
+  height: 40px;
+}
+
+.bl_nicoCale td {
+}
+.bl_nicoCale td:hover {
+  background-color: #e7f4ff;
+  cursor: pointer;
+}
+.bl_nicoCale td.bl_nicoCale_cell__otherMonth {
+  color: #ababab;
+}
+
+.bl_nicoCale .bl_nicoCale_cellHeader {
+  height: 30px;
+  display: flex;
+  justify-content: end;
+}
+.bl_nicoCale .bl_nicoCale_date {
+  padding: 2px;
+  width: 20px;
+  height: 20px;
+}
+.bl_nicoCale .bl_nicoCale_date.bl_nicoCale_date__today {
+  border-radius: 100%;
+  background-color: rgb(236, 121, 92);
+  color: white;
+}
+
+.bl_nicoCale .bl_nicoCale_cellBody {
+  height: calc(100% - 30px);
+}
+.bl_nicoCale_colWeekend {
+  background-color: #efefef;
+}
+.bl_nicoCale_colWeekend.bl_nicoCale_colWeekend__sun {
+  color: red;
+}
+.bl_nicoCale_colWeekend.bl_nicoCale_colWeekend__sat {
+  color: blue;
+}
+
+.bl_nicoCale_btn {
+  padding: 4px 20px;
+  border-radius: 15px;
+  background-color: white;
+  border: 1px solid #dedede;
+  box-shadow: 1px 1px 0 0 #e2e2e2;
+  cursor: pointer;
+}
+.bl_nicoCale_btn:hover {
+  background-color: rgb(245, 255, 231);
+}
+.bl_nicoCale_btn.bl_nicoCale_btn__prev {
+}
+.bl_nicoCale_btn.bl_nicoCale_btn__this {
+}
+.bl_nicoCale_btn.bl_nicoCale_btn__next {
+}
