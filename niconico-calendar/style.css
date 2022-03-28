@@ -1,3 +1,18 @@
+/***************************************************
+ * Variable
+ ***************************************************/
+
+:root {
+  --color-nico-good: #ff6b84;
+  --color-nico-ok: orange;
+  --color-nico-bad: lightblue;
+  --bg-color-nico-hover: #f1f6f1;
+}
+
+/***************************************************
+ * Base
+ ***************************************************/
+
 body {
   box-sizing: border-box;
 }
@@ -5,12 +20,59 @@ table {
   border-collapse: collapse;
 }
 
+/***************************************************
+ * Element
+ ***************************************************/
+
+.el_nicoGood {
+  color: var(--color-nico-good);
+}
+.el_nicoOk {
+  color: var(--color-nico-ok);
+}
+.el_nicoBad {
+  color: var(--color-nico-bad);
+}
+
+/***************************************************
+ * Layout
+ ***************************************************/
+
 .ly_header {
 }
 .ly_container {
   width: 90%;
   max-width: 600px;
   margin: auto;
+}
+.ly_header .ly_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/***************************************************
+ * Block
+ ***************************************************/
+
+.bl_nicoCelection {
+  display: flex;
+  font-size: 1.2em;
+}
+.bl_nicoCelection_option {
+  display: flex;
+  padding: 2px 10px;
+  border-radius: 15px;
+  align-items: center;
+  transition: all 0.2s;
+  font-size: 2.5em;
+}
+.bl_nicoCelection_option:hover {
+  background-color: var(--bg-color-nico-hover);
+}
+.bl_nicoCelection_option label {
+  display: inline-flex;
+  gap: 2px;
 }
 
 .bl_nicoCale {
@@ -72,6 +134,10 @@ table {
 .bl_nicoCale .bl_nicoCale_cellBody {
   height: calc(100% - 30px);
 }
+.bl_nicoCale .bl_nicoCale_cellBody svg {
+  font-size: 40px;
+}
+
 .bl_nicoCale_colWeekend {
   background-color: #efefef;
 }
