@@ -7,12 +7,42 @@
     <title>Document</title>
 
     <link rel="stylesheet" href="./style.css" />
+    <script src="./index.js" type="module"></script>
+    <script src="https://code.iconify.design/2/2.2.0/iconify.min.js"></script>
   </head>
 
   <body>
     <div class="ly_header">
       <div class="ly_container">
         <h1>NicoCalendar</h1>
+
+        <form class="bl_nicoCelection">
+          <div class="bl_nicoCelection_option">
+            <input
+              name="nicoSelect"
+              id="nicoSelect__good"
+              class="js_nicoSelect"
+              data-nico-id="1"
+              type="radio"
+              checked
+            />
+            <label for="nicoSelect__good">
+              <span class="el_nicoGood iconify" data-icon="gg:smile-mouth-open"></span>
+            </label>
+          </div>
+
+          <div class="bl_nicoCelection_option">
+            <input name="nicoSelect" id="nicoSelect__ok" class="js_nicoSelect" data-nico-id="2" type="radio" />
+            <label for="nicoSelect__ok">
+              <span class="el_nicoOk iconify" data-icon="fluent:emoji-smile-slight-24-regular"></span>
+            </label>
+          </div>
+
+          <div class="bl_nicoCelection_option">
+            <input name="nicoSelect" id="nicoSelect__bad" class="js_nicoSelect" data-nico-id="3" type="radio" />
+            <label for="nicoSelect__bad"><span class="el_nicoBad iconify" data-icon="gg:smile-sad"></span> </label>
+          </div>
+        </form>
       </div>
     </div>
 
