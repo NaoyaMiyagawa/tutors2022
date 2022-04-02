@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  web:
+    build: ./docker
+    volumes:
+      - .:/var/www/html
+    ports:
+      - '8080:80'
+    privileged: true
+    platform: linux/x86_64
