@@ -15,7 +15,8 @@ $getMonthQuery = function (DateTimeImmutable $month) {
     return "?year={$month->format('Y')}&month={$month->format('m')}";
 };
 
-$firstDateOnCalendar = $displayMonth->modify("- {$displayMonth->format('w')} days");
+$offsetDays = intval($displayMonth->format('w')) + 1;
+$firstDateOnCalendar = $displayMonth->modify("- {$offsetDays} days");
 $date = $firstDateOnCalendar;
 
 $DAY_LIST = ['日', '月', '火', '水', '木', '金', '土'];
