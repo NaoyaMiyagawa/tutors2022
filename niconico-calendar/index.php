@@ -1,3 +1,21 @@
+<?php
+$year = $_GET['year'];
+$month = $_GET['month'];
+
+$now = new DateTimeImmutable('now', new DateTimeZone('Asia/Tokyo'));
+$displayMonth = $now;
+if (isset($year) && isset($month)) {
+    $displayMonth = $displayMonth->setDate($year, $month, 1);
+}
+
+$prevMonth = $displayMonth->modify("-1 month");
+$nextMonth = $displayMonth->modify("+1 month");
+
+$getMonthQuery = function (DateTimeImmutable $month) {
+    return "?year={$month->format('Y')}&month={$month->format('m')}";
+};
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,11 +62,11 @@
         <div class="ly_container">
             <div class="bl_nicoCale">
                 <div class="bl_nicoCale_header">
-                    <div class="bl_nicoCale_targetMonth">2022年3月</div>
+                    <div class="bl_nicoCale_targetMonth"><?= "{$year}年{$month}月" ?></div>
                     <div class="bl_nicoCale_control">
-                        <button class="bl_nicoCale_btn bl_nicoCale_btn__prev">◁</button>
-                        <button class="bl_nicoCale_btn bl_nicoCale_btn__this">今日</button>
-                        <button class="bl_nicoCale_btn bl_nicoCale_btn__next">▷</button>
+                        <a class="bl_nicoCale_btn bl_nicoCale_btn__prev" href="<?= $getMonthQuery($prevMonth) ?>">◁</a>
+                        <a class="bl_nicoCale_btn bl_nicoCale_btn__this" href="<?= $getMonthQuery($now) ?>">今日</a>
+                        <a class="bl_nicoCale_btn bl_nicoCale_btn__next" href="<?= $getMonthQuery($nextMonth) ?>">▷</a>
                     </div>
                 </div>
                 <table>
