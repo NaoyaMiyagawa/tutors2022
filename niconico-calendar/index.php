@@ -14,6 +14,30 @@ $nextMonth = $displayMonth->modify("+1 month");
 $getMonthQuery = function (DateTimeImmutable $month) {
     return "?year={$month->format('Y')}&month={$month->format('m')}";
 };
+
+$firstDateOnCalendar = $displayMonth->modify("- {$displayMonth->format('w')} days");
+$date = $firstDateOnCalendar;
+
+$DAY_LIST = ['日', '月', '火', '水', '木', '金', '土'];
+
+$getDay = function (int $day) use ($DAY_LIST) {
+    return $DAY_LIST[$day];
+};
+
+$getColClass = function (int $day) {
+    if ($day === 0) {
+        return 'bl_nicoCale_colWeekend bl_nicoCale_colWeekend__sun';
+    } else if ($day === 6) {
+        return 'bl_nicoCale_colWeekend bl_nicoCale_colWeekend__sat';
+    }
+    return 'bl_nicoCale_colWeekday';
+};
+
+$getCellClass = function (DateTimeImmutable $datetime) use ($displayMonth) {
+    $isDisplayMonth = $datetime->format('Ym') === $displayMonth->format('Ym');
+    $cellClass = $isDisplayMonth ? '' : 'bl_nicoCale_cell__otherMonth';
+    return $cellClass;
+};
 ?>
 
 <!DOCTYPE html>
@@ -72,281 +96,31 @@ $getMonthQuery = function (DateTimeImmutable $month) {
                 <table>
                     <thead>
                         <tr>
-                            <th class="bl_nicoCale_colWeekend bl_nicoCale_colWeekend__sun">日</th>
-                            <th class="">月</th>
-                            <th class="">火</th>
-                            <th class="">水</th>
-                            <th class="">木</th>
-                            <th class="">金</th>
-                            <th class="bl_nicoCale_colWeekend bl_nicoCale_colWeekend__sat">土</th>
+                            <?php foreach ($DAY_LIST as $dayIndex => $day) : ?>
+                                <th class="<?= $getColClass($dayIndex) ?>"><?= $day ?></th>
+                            <?php endforeach; ?>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <tr>
-                            <td class="bl_nicoCale_colWeekend bl_nicoCale_colWeekend__sun bl_nicoCale_cell__otherMonth">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">27</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="bl_nicoCale_cell__otherMonth">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">28</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="bl_nicoCale_cell__otherMonth">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">29</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="bl_nicoCale_cell__otherMonth">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">30</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="bl_nicoCale_cell__otherMonth">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">31</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">1</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="bl_nicoCale_colWeekend bl_nicoCale_colWeekend__sat">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">2</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="bl_nicoCale_colWeekend bl_nicoCale_colWeekend__sun">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">3</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">4</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">5</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">6</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">7</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">8</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="bl_nicoCale_colWeekend bl_nicoCale_colWeekend__sat">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">9</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="bl_nicoCale_colWeekend bl_nicoCale_colWeekend__sun">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">10</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">11</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">12</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">13</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">14</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">15</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="bl_nicoCale_colWeekend bl_nicoCale_colWeekend__sat">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">16</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="bl_nicoCale_colWeekend bl_nicoCale_colWeekend__sun">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">17</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">18</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">19</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">20</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">21</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">22</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="bl_nicoCale_colWeekend bl_nicoCale_colWeekend__sat">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">23</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="bl_nicoCale_colWeekend bl_nicoCale_colWeekend__sun">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">24</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">25</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">26</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date bl_nicoCale_date__today">27</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">28</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">29</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="bl_nicoCale_colWeekend bl_nicoCale_colWeekend__sat">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">30</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="bl_nicoCale_colWeekend bl_nicoCale_colWeekend__sun bl_nicoCale_cell__otherMonth">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">1</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="bl_nicoCale_cell__otherMonth">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">2</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="bl_nicoCale_cell__otherMonth">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">3</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="bl_nicoCale_cell__otherMonth">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">4</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="bl_nicoCale_cell__otherMonth">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">5</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="bl_nicoCale_cell__otherMonth">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">6</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                            <td class="bl_nicoCale_colWeekend bl_nicoCale_colWeekend__sat bl_nicoCale_cell__otherMonth">
-                                <div class="bl_nicoCale_cellHeader">
-                                    <span class="bl_nicoCale_date">7</span>
-                                </div>
-                                <div class="bl_nicoCale_cellBody"></div>
-                            </td>
-                        </tr>
+                        <?php for ($weekIndex = 0; $weekIndex < 6; $weekIndex++) : ?>
+                            <tr>
+                                <?php for ($dayIndex = 0; $dayIndex < 7; $dayIndex++) : ?>
+                                    <?php
+                                    $date = $date->modify("+1 day");
+                                    $colClass = $getColClass($dayIndex);
+                                    $cellClass = $getCellClass($date);
+                                    ?>
+
+                                    <td class="<?= "{$colClass} {$cellClass}" ?>">
+                                        <div class="bl_nicoCale_cellHeader">
+                                            <span class="bl_nicoCale_date"><?= $date->format('d') ?></span>
+                                        </div>
+                                        <div class="bl_nicoCale_cellBody"></div>
+                                    </td>
+                                <?php endfor; ?>
+                            </tr>
+                        <?php endfor; ?>
                     </tbody>
                 </table>
             </div>
