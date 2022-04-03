@@ -1,4 +1,9 @@
 <?php
+
+use PhpCalendar\CalendarDate;
+
+require_once './PhpCalendar/CalendarDate.php';
+
 $year = $_GET['year'] ?? date('Y');
 $month = $_GET['month'] ?? date('m');
 
@@ -12,30 +17,9 @@ $getMonthQuery = function (DateTimeImmutable $month) {
     return "?year={$month->format('Y')}&month={$month->format('m')}";
 };
 
-$offsetDays = intval($displayMonth->format('w')) + 1;
+$offsetDays = intval($displayMonth->format('w'));
 $firstDateOnCalendar = $displayMonth->modify("- {$offsetDays} days");
 $date = $firstDateOnCalendar;
-
-$DAY_LIST = ['日', '月', '火', '水', '木', '金', '土'];
-
-$getDay = function (int $day) use ($DAY_LIST) {
-    return $DAY_LIST[$day];
-};
-
-$getColClass = function (int $day) {
-    if ($day === 0) {
-        return 'bl_nicoCale_colWeekend bl_nicoCale_colWeekend__sun';
-    } else if ($day === 6) {
-        return 'bl_nicoCale_colWeekend bl_nicoCale_colWeekend__sat';
-    }
-    return 'bl_nicoCale_colWeekday';
-};
-
-$getCellClass = function (DateTimeImmutable $datetime) use ($displayMonth) {
-    $isDisplayMonth = $datetime->format('Ym') === $displayMonth->format('Ym');
-    $cellClass = $isDisplayMonth ? '' : 'bl_nicoCale_cell__otherMonth';
-    return $cellClass;
-};
 ?>
 
 <!DOCTYPE html>
@@ -94,8 +78,11 @@ $getCellClass = function (DateTimeImmutable $datetime) use ($displayMonth) {
                 <table>
                     <thead>
                         <tr>
-                            <?php foreach ($DAY_LIST as $dayIndex => $day) : ?>
-                                <th class="<?= $getColClass($dayIndex) ?>"><?= $day ?></th>
+                            <?php foreach (CalendarDate::DAY_LIST as $dayIndex => $day) : ?>
+                                <?php
+                                $headerDate = new CalendarDate($date->modify("+{$dayIndex} day"), $displayMonth);
+                                ?>
+                                <th class="<?= $headerDate->getDayClass() ?>"><?= $headerDate->getDayName() ?></th>
                             <?php endforeach; ?>
                         </tr>
                     </thead>
@@ -105,17 +92,19 @@ $getCellClass = function (DateTimeImmutable $datetime) use ($displayMonth) {
                             <tr>
                                 <?php for ($dayIndex = 0; $dayIndex < 7; $dayIndex++) : ?>
                                     <?php
-                                    $date = $date->modify("+1 day");
-                                    $colClass = $getColClass($dayIndex);
-                                    $cellClass = $getCellClass($date);
+                                    $calendarDate = new CalendarDate($date, $displayMonth);
                                     ?>
 
-                                    <td class="<?= "{$colClass} {$cellClass}" ?>">
+                                    <td class="<?= "{$calendarDate->getDayClass()} {$calendarDate->getDateClass()}" ?>">
                                         <div class="bl_nicoCale_cellHeader">
-                                            <span class="bl_nicoCale_date"><?= $date->format('d') ?></span>
+                                            <span class="bl_nicoCale_date"><?= $calendarDate->getDate() ?></span>
                                         </div>
                                         <div class="bl_nicoCale_cellBody"></div>
                                     </td>
+
+                                    <?php
+                                    $date = $date->modify("+1 day");
+                                    ?>
                                 <?php endfor; ?>
                             </tr>
                         <?php endfor; ?>
