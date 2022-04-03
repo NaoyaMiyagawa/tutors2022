@@ -3,8 +3,15 @@
 ## NicoCalendar
 
 - HTML ver.
-- PHP ver.
-  - runnable on docker (php-apache)
+  - Vanilla JS
+    - http://localhost:8080/index.html
+  - jQuery
+    - http://localhost:8080/index-jquery.html
+- PHP ver. (runnable on docker (php-apache))
+  - PHP
+    - http://localhost:8080/index.php
+  - phpinfo
+    - http://localhost:8080/info.php
 
 ### Docker
 
