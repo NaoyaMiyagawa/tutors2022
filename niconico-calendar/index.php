@@ -1,12 +1,9 @@
 <?php
-$year = $_GET['year'];
-$month = $_GET['month'];
+$year = $_GET['year'] ?? date('Y');
+$month = $_GET['month'] ?? date('m');
 
 $now = new DateTimeImmutable('now', new DateTimeZone('Asia/Tokyo'));
-$displayMonth = $now;
-if (isset($year) && isset($month)) {
-    $displayMonth = $displayMonth->setDate($year, $month, 1);
-}
+$displayMonth = $now->setDate($year, $month, 1);
 
 $prevMonth = $displayMonth->modify("-1 month");
 $nextMonth = $displayMonth->modify("+1 month");
