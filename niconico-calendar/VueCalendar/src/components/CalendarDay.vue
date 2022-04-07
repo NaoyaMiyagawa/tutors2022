@@ -2,13 +2,11 @@
 import { computed, inject } from 'vue';
 import dayjs, { Dayjs } from 'dayjs';
 import { feelingsKey } from '../symbols';
+import IconNicoGood from './icons/IconNicoGood.vue';
 
 const props = defineProps<{
   day: Dayjs;
   displayMonth: Dayjs;
-}>();
-const emit = defineEmits<{
-  enterNico: { day: Dayjs };
 }>();
 
 const DAY_SUNDAY = 0;
@@ -21,6 +19,7 @@ const isWeekend = computed(() => isSunday.value || isSaturday.value);
 const isDisplayMonth = computed(() => props.day.month() === props.displayMonth.month());
 
 const feelings = inject(feelingsKey);
+const nicoFeeling = computed(() => feelings.feelings.value[props.day.format('YYYY-MM-DD')]);
 </script>
 
 <template>
@@ -36,7 +35,11 @@ const feelings = inject(feelingsKey);
     <div class="bl_nicoCale_cellHeader">
       <span class="bl_nicoCale_date" :class="{ bl_nicoCale_date__today: isToday }">{{ day.date() }}</span>
     </div>
-    <div class="bl_nicoCale_cellBody"></div>
+    <div class="bl_nicoCale_cellBody">
+      <template v-if="nicoFeeling === 1">
+        <IconNicoGood />
+      </template>
+    </div>
   </td>
 </template>
 

@@ -39,7 +39,7 @@ const changeToNextMonth = () => {
 
 const formatDateKey = (day: Dayjs) => day.format('YYYY-MM-DD');
 const setFeeling = (day: Dayjs) => {
-  feelings[formatDateKey(day)] = selectedNicoId;
+  feelings.value[formatDateKey(day)] = selectedNicoId.value;
 };
 provide(feelingsKey, {
   feelings: readonly(feelings),
@@ -52,7 +52,7 @@ provide(feelingsKey, {
     <div class="ly_container">
       <h1>NicoCalendar</h1>
 
-      <NicoSelection :selectedNicoId="selectedNicoId" />
+      <NicoSelection v-model:selectedNicoId="selectedNicoId" />
     </div>
   </div>
 

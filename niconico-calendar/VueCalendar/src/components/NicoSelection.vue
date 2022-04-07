@@ -3,9 +3,10 @@ import IconNicoGood from './icons/IconNicoGood.vue';
 import IconNicoOk from './icons/IconNicoOk.vue';
 import IconNicoBad from './icons/IconNicoBad.vue';
 
-const props = defineProps({
-  selectedNicoId: { type: Number, required: true },
-});
+const props = defineProps<{
+  selectedNicoId: number;
+}>();
+const emit = defineEmits<{ 'update:selectedNicoId': void }>();
 
 const nicoOptions = [
   { id: 'nicoSelect__good', value: 1, icon: IconNicoGood },
@@ -18,7 +19,13 @@ const nicoOptions = [
   <form class="bl_nicoCelection">
     <template v-for="nicoOption in nicoOptions" :key="nicoOption.id">
       <div class="bl_nicoCelection_option">
-        <input type="radio" :id="nicoOption.id" :value="nicoOption.value" v-model="selectedNicoId" />
+        <!-- :value="nicoOption.value" -->
+        <input
+          type="radio"
+          :id="nicoOption.id"
+          :value="nicoOption.value"
+          :checked="selectedNicoId === nicoOption.value"
+        />
 
         <label :for="nicoOption.id">
           <component :is="nicoOption.icon" />
