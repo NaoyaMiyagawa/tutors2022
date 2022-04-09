@@ -4,7 +4,7 @@ import IconNicoOk from './IconNicoOk.vue';
 import IconNicoBad from './IconNicoBad.vue';
 
 const props = defineProps<{
-  nicoId: number;
+  nicoId: number | null;
 }>();
 </script>
 
@@ -12,14 +12,14 @@ const props = defineProps<{
   <template v-if="nicoId === 1">
     <IconNicoGood />
   </template>
-  <template v-if="nicoId === 2">
+  <template v-else-if="nicoId === 2">
     <IconNicoOk />
   </template>
-  <template v-if="nicoId === 3">
+  <template v-else-if="nicoId === 3">
     <IconNicoBad />
   </template>
 </template>
 
-<style lang="scss" scoped>
-//
+<style scoped>
+/*  */
 </style>

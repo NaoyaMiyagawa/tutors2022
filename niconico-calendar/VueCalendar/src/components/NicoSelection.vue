@@ -2,30 +2,33 @@
 import IconNicoGood from './icons/IconNicoGood.vue';
 import IconNicoOk from './icons/IconNicoOk.vue';
 import IconNicoBad from './icons/IconNicoBad.vue';
+import { watch, watchEffect } from 'vue';
 
 const props = defineProps<{
   selectedNicoId: number;
 }>();
-const emit = defineEmits<{ 'update:selectedNicoId': void }>();
+const emit = defineEmits<{
+  (e: 'update', selectedNicoId: number): void;
+}>();
 
 const nicoOptions = [
   { id: 'nicoSelect__good', value: 1, icon: IconNicoGood },
   { id: 'nicoSelect__ok', value: 2, icon: IconNicoOk },
   { id: 'nicoSelect__bad', value: 3, icon: IconNicoBad },
 ];
+watch(
+  () => props.selectedNicoId,
+  () => {
+    emit['update:selectedNicoId'];
+  }
+);
 </script>
 
 <template>
   <form class="bl_nicoCelection">
     <template v-for="nicoOption in nicoOptions" :key="nicoOption.id">
       <div class="bl_nicoCelection_option">
-        <!-- :value="nicoOption.value" -->
-        <input
-          type="radio"
-          :id="nicoOption.id"
-          :value="nicoOption.value"
-          :checked="selectedNicoId === nicoOption.value"
-        />
+        <input type="radio" :id="nicoOption.id" :value="nicoOption.value" v-model="selectedNicoId" />
 
         <label :for="nicoOption.id">
           <component :is="nicoOption.icon" />
