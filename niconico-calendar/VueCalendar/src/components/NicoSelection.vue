@@ -8,7 +8,7 @@ const props = defineProps<{
   selectedNicoId: number;
 }>();
 const emit = defineEmits<{
-  (e: 'update', selectedNicoId: number): void;
+  (e: 'update:selectedNicoId', nicoId: number): void;
 }>();
 
 const nicoOptions = [
@@ -16,19 +16,19 @@ const nicoOptions = [
   { id: 'nicoSelect__ok', value: 2, icon: IconNicoOk },
   { id: 'nicoSelect__bad', value: 3, icon: IconNicoBad },
 ];
-watch(
-  () => props.selectedNicoId,
-  () => {
-    emit['update:selectedNicoId'];
-  }
-);
 </script>
 
 <template>
   <form class="bl_nicoCelection">
     <template v-for="nicoOption in nicoOptions" :key="nicoOption.id">
       <div class="bl_nicoCelection_option">
-        <input type="radio" :id="nicoOption.id" :value="nicoOption.value" v-model="selectedNicoId" />
+        <input
+          type="radio"
+          :id="nicoOption.id"
+          :value="nicoOption.value"
+          v-model="selectedNicoId"
+          @change="$emit('update:selectedNicoId', nicoOption.value)"
+        />
 
         <label :for="nicoOption.id">
           <component :is="nicoOption.icon" />

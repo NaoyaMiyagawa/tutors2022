@@ -14,7 +14,7 @@ const days = [...Array(7)].map((_, i) => {
 <template>
   <tr>
     <template v-for="day in days" :key="day">
-      <CalendarDay :day="day" :display-month="displayMonth" />
+      <CalendarDay :day="day" :displayMonth="displayMonth" />
     </template>
   </tr>
 </template>
