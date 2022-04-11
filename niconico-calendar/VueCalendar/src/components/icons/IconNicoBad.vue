@@ -5,3 +5,9 @@ import { Icon } from '@iconify/vue';
 <template>
   <Icon class="el_nicoBad" icon="gg:smile-sad" />
 </template>
+
+<style scoped>
+.el_nicoBad {
+  color: lightblue;
+}
+</style>

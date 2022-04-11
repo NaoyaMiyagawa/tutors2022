@@ -92,14 +92,7 @@ provide(feelingsKey, {
 </template>
 
 <style>
-/***************************************************
- * Variable
- ***************************************************/
-
 :root {
-  --color-nico-good: #ff6b84;
-  --color-nico-ok: orange;
-  --color-nico-bad: lightblue;
   --bg-color-nico-hover: #f1f6f1;
 }
 
@@ -112,20 +105,6 @@ body {
 }
 table {
   border-collapse: collapse;
-}
-
-/***************************************************
- * Element
- ***************************************************/
-
-.el_nicoGood {
-  color: var(--color-nico-good);
-}
-.el_nicoOk {
-  color: var(--color-nico-ok);
-}
-.el_nicoBad {
-  color: var(--color-nico-bad);
 }
 
 /***************************************************
