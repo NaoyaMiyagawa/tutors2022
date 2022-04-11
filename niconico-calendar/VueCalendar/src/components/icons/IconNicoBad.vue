@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import { Icon } from '@iconify/vue';
+</script>
+
 <template>
-  <span class="el_nicoBad iconify" data-icon="gg:smile-sad"></span>
+  <Icon class="el_nicoBad" icon="gg:smile-sad" />
 </template>

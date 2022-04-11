@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import { Icon } from '@iconify/vue';
+</script>
+
 <template>
-  <span class="el_nicoOk iconify" data-icon="fluent:emoji-smile-slight-24-regular"></span>
+  <Icon class="el_nicoOk" icon="fluent:emoji-smile-slight-24-regular" />
 </template>

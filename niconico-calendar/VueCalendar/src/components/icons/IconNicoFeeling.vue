@@ -6,20 +6,13 @@ import IconNicoBad from './IconNicoBad.vue';
 const props = defineProps<{
   nicoId: number | null;
 }>();
+const iconFeeling = {
+  1: IconNicoGood,
+  2: IconNicoOk,
+  3: IconNicoBad,
+};
 </script>
 
 <template>
-  <template v-if="nicoId === 1">
-    <IconNicoGood />
-  </template>
-  <template v-else-if="nicoId === 2">
-    <IconNicoOk />
-  </template>
-  <template v-else-if="nicoId === 3">
-    <IconNicoBad />
-  </template>
+  <component v-if="nicoId" :is="iconFeeling[nicoId]" />
 </template>
-
-<style scoped>
-/*  */
-</style>

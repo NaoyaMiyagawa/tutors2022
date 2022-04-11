@@ -36,7 +36,7 @@ const nicoFeeling = computed(() => feelings.feelings.value[props.day.format('YYY
       <span class="bl_nicoCale_date" :class="{ bl_nicoCale_date__today: isToday }">{{ day.date() }}</span>
     </div>
     <div class="bl_nicoCale_cellBody">
-      <IconNicoFeeling :nico-id="nicoFeeling" />
+      <IconNicoFeeling :nicoId="nicoFeeling" />
     </div>
   </td>
 </template>
