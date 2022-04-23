@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Front;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
@@ -18,7 +18,7 @@ class PostController extends Controller
             ->orderBy('published_at', 'desc')
             ->paginate(10);
 
-        return view('front.posts.index', compact('posts'));
+        return view('user.posts.index', compact('posts'));
     }
 
     /**
@@ -30,6 +30,6 @@ class PostController extends Controller
     {
         $post = Post::where('is_public', true)->findOrFail($id);
 
-        return view('front.posts.show', compact('post'));
+        return view('user.posts.show', compact('post'));
     }
 }

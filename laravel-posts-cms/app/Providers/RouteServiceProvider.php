@@ -37,18 +37,20 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/api.php'));
 
-            // フロント画面
+            // Web
             Route::middleware('web')
-                ->namespace($this->namespace . '\Front')
-                ->as('front.')
-                ->group(base_path('routes/front.php'));
+                ->group(function () {
+                    // フロント画面
+                    Route::as('user.')
+                        ->namespace($this->namespace . '\User')
+                        ->group(base_path('routes/user.php'));
 
-            // 管理画面
-            Route::prefix('admin')
-                ->middleware('web')
-                ->namespace($this->namespace . '\Back')
-                ->as('back.')
-                ->group(base_path('routes/back.php'));
+                    // 管理画面
+                    Route::as('admin.')
+                        ->prefix('admin')
+                        ->namespace($this->namespace . '\Admin')
+                        ->group(base_path('routes/admin.php'));
+                });
         });
     }
 
