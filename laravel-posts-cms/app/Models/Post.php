@@ -9,14 +9,14 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected array $fillable = [
+    protected $fillable = [
         'title',
         'body',
         'is_public',
         'published_at',
     ];
 
-    protected array $casts = [
+    protected $casts = [
         'is_public' => 'bool',
         'published_at' => 'datetime',
     ];
