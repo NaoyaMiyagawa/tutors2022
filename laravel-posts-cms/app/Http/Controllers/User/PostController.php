@@ -15,7 +15,7 @@ class PostController extends Controller
     {
         $posts = Post::publicList();
 
-        return view('front.posts.index', compact('posts'));
+        return view('user.posts.index', compact('posts'));
     }
 
     /**

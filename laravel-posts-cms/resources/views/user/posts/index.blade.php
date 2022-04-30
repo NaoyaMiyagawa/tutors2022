@@ -15,7 +15,7 @@ $title = '投稿一覧';
       <table class="table">
         @foreach ($posts as $post)
           <tr>
-            <td>{{ $post->published_at->format('Y年m月d日') }}</td>
+            <td>{{ $post->published_format }}</td>
             <td>{!! link_to_route('user.posts.show', $post->title, $post) !!}</td>
           </tr>
         @endforeach

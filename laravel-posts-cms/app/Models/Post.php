@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class Post extends Model
 {
@@ -23,6 +24,15 @@ class Post extends Model
     ];
 
     /**
+     * 公開日を年月日で表示
+     * @return string
+     */
+    public function getPublishedFormatAttribute(): string
+    {
+        return $this->published_at->format('Y年m月d日');
+    }
+
+    /**
      * Scope ｜ 公開状態
      * @return Builder
      */
@@ -33,9 +43,9 @@ class Post extends Model
 
     /**
      * Scope ｜ 公開記事一覧取得
-     * @return Builder
+     * @return LengthAwarePaginator
      */
-    public function scopePublicList(Builder $query): Builder
+    public function scopePublicList(Builder $query): LengthAwarePaginator
     {
         return $query
             ->public()
