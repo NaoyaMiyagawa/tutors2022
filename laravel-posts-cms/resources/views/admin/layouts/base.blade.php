@@ -44,6 +44,8 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-md-12">
+            <x-admin.alert />
+
             <div class="card">
               @yield('content')
             </div>

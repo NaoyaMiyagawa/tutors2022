@@ -55,9 +55,9 @@ class Post extends Model
 
     /**
      * Scope ｜ 公開記事をIDで取得
-     * @return Builder
+     * @return Post
      */
-    public function scopePublicFindById(Builder $query, int $id): Builder
+    public function scopePublicFindById(Builder $query, int $id): Post
     {
         return $query->public()->findOrFail($id);
     }
