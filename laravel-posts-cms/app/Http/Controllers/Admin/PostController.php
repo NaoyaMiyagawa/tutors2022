@@ -6,12 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use View;
 
 class PostController extends Controller
 {
     /**
      * Post list page
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\View\View
      */
     public function index()
     {
@@ -21,7 +22,7 @@ class PostController extends Controller
 
     /**
      * Create post page
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\View\View
      */
     public function create()
     {
@@ -63,11 +64,11 @@ class PostController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -77,9 +78,17 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostRequest $request, Post $post)
     {
-        //
+        if ($post->update($request->all())) {
+            $flash = ['success' => 'データを更新しました。'];
+        } else {
+            $flash = ['error' => 'データの更新に失敗しました'];
+        }
+
+        return redirect()
+            ->route('admin.posts.edit', $post)
+            ->with($flash);
     }
 
     /**
