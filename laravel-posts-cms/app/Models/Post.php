@@ -25,6 +25,20 @@ class Post extends Model
     ];
 
     /**
+     * boot
+     * @return void
+     */
+    protected static function boot(): void
+    {
+        parent::boot();
+
+        // 保存時user_idをログインユーザーに設定
+        self::saving(function ($post) {
+            $post->user_id = \Auth::id();
+        });
+    }
+
+    /**
      * @return BelongsTo
      */
     public function user(): BelongsTo
