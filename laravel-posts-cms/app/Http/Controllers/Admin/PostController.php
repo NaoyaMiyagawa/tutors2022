@@ -15,10 +15,11 @@ class PostController extends Controller
      * Post list page
      * @return \Illuminate\Contracts\View\View
      */
-    public function index()
+    public function index($tagSlug = null)
     {
-        $posts = Post::with('user')->latest('id')->paginate(20);
-        return view('admin.posts.index', compact('posts'));
+        $posts = Post::publicList($tagSlug);
+        $tags = Tag::all();
+        return view('admin.posts.index', compact('posts', 'tags'));
     }
 
     /**

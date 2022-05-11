@@ -3,6 +3,7 @@
  * @var Illuminate\Pagination\LengthAwarePaginator|\App\Models\Post[] $posts
  */
 $title = '投稿一覧';
+$tagSlugInUrl = request()->segment(3);
 ?>
 @extends('user.layouts.base')
 
@@ -12,6 +13,21 @@ $title = '投稿一覧';
     @if ($posts->count() <= 0)
       <p>表示する投稿はありません。</p>
     @else
+      <ul class="nav nav-pills mb-2">
+        <li class="nav-item">
+          {{ link_to_route('user.posts.index', 'すべて', null, [
+              'class' => 'nav-link' . (is_null($tagSlugInUrl) ? ' active' : ''),
+          ]) }}
+        </li>
+        @foreach ($tags as $tag)
+          <li class="nav-item">
+            {{ link_to_route('user.posts.index.tag', $tag->name, $tag->slug, [
+                'class' => 'nav-link' . ($tagSlugInUrl === $tag->slug ? ' active' : ''),
+            ]) }}
+          </li>
+        @endforeach
+      </ul>
+
       <table class="table">
         @foreach ($posts as $post)
           <tr>

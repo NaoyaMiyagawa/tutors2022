@@ -77,8 +77,14 @@ class Post extends Model
      * Scope ｜ 公開記事一覧取得
      * @return LengthAwarePaginator
      */
-    public function scopePublicList(Builder $query): LengthAwarePaginator
+    public function scopePublicList(Builder $query, string $tagSlug = null): LengthAwarePaginator
     {
+        if ($tagSlug) {
+            $query->whereHas('tags', function ($query) use ($tagSlug) {
+                $query->where('slug', $tagSlug);
+            });
+        }
+
         return $query
             ->public()
             ->latest('published_at')
