@@ -39,6 +39,7 @@ class PostController extends Controller
     public function store(PostRequest $request)
     {
         $post = Post::create($request->all());
+        $post->tags()->attach($request->tags);
 
         if ($post) {
             return redirect()
@@ -71,7 +72,6 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $tags = Tag::pluck('name', 'id')->toArray();
-        logger($tags);
         return view('admin.posts.edit', compact('post', 'tags'));
     }
 
@@ -84,6 +84,8 @@ class PostController extends Controller
      */
     public function update(PostRequest $request, Post $post)
     {
+        $post->tags()->sync($request->tags);
+
         if ($post->update($request->all())) {
             $flash = ['success' => 'データを更新しました。'];
         } else {
@@ -103,6 +105,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $post->tags()->detach();
+
         if ($post->delete()) {
             $flash = ['success' => 'データを削除しました。'];
         } else {
