@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use View;
 
@@ -26,7 +27,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $tags = Tag::pluck('name', 'id')->toArray();
+        return view('admin.posts.create', compact('tags'));
     }
 
     /**
@@ -68,7 +70,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('admin.posts.edit', compact('post'));
+        $tags = Tag::pluck('name', 'id')->toArray();
+        logger($tags);
+        return view('admin.posts.edit', compact('post', 'tags'));
     }
 
     /**
